@@ -141,7 +141,7 @@ Your medical records are secure and confidential.
 function loginPatient(){
 
 fetch(
-"http://localhost:3000/patient/login",
+"https://simtar.onrender.com/patient/login",
 {
 
 method:"POST",
@@ -171,7 +171,7 @@ document.getElementById(
 if(data.success){
 
 window.open(
-"http://localhost:3000" +
+"https://simtar.onrender.com" +
 data.pdf,
 "_blank"
 );

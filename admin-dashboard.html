@@ -422,7 +422,7 @@ window.location.href = "admin-login.html";
 
 function loadAppointments(){
 
-fetch("http://localhost:3000/appointments")
+fetch("https://simtar.onrender.com/appointments")
 .then(res => res.json())
 .then(data => {
 
@@ -464,7 +464,7 @@ const table = document.getElementById("appointmentsTable");
 function deleteAppointment(index){
 
 fetch(
-"http://localhost:3000/appointment/" + index,
+"https://simtar.onrender.com/appointment/" + index,
 {
 method:"DELETE"
 }
@@ -510,7 +510,7 @@ row.style.display = text.includes(input) ? "" : "none";
 
 function loadPatients(){
 
-fetch("http://localhost:3000/patients")
+fetch("https://simtar.onrender.com/patients")
 .then(res => res.json())
 .then(data => {
 
@@ -566,7 +566,7 @@ row.style.display = text.includes(input) ? "" : "none";
 
 function loadResultsTable(){
 
-fetch("http://localhost:3000/results-list")
+fetch("https://simtar.onrender.com/results-list")
 .then(res => res.json())
 .then(files => {
 
@@ -588,7 +588,7 @@ table.innerHTML += `
 </td>
 <td>
 <a
-href="http://localhost:3000/results/${file}"
+href="https://simtar.onrender.com/results/${file}"
 target="_blank"
 class="btn"
 >
@@ -615,8 +615,9 @@ Delete
 function loadPendingResults(){
 
 Promise.all([
-fetch("http://localhost:3000/patients").then(res => res.json()),
-fetch("http://localhost:3000/results-list").then(res => res.json())
+fetch("https://simtar.onrender.com/patients").then(res => res.json()),
+
+fetch("https://simtar.onrender.com/results-list").then(res => res.json())
 ])
 .then(([patients, files]) => {
 
@@ -669,7 +670,7 @@ currentPassword
 if(newPassword === null) return;
 
 fetch(
-"http://localhost:3000/patients"
+"https://simtar.onrender.com/patients"
 )
 .then(res => res.json())
 .then(data => {
@@ -681,7 +682,7 @@ data[index].password =
 newPassword;
 
 fetch(
-"http://localhost:3000/save-patients",
+"https://simtar.onrender.com/save-patients",
 {
 method:"POST",
 
@@ -711,7 +712,7 @@ loadPendingResults();
 function deleteResult(file){
 
 fetch(
-"http://localhost:3000/delete-result/" + file,
+"https://simtar.onrender.com/delete-result/" + file,
 {
 method:"DELETE"
 }
