@@ -1,0 +1,25 @@
+{
+  "appointments": [
+    {
+      "name": "Tapiwa Makunde",
+      "phone": "0717896878",
+      "service": "HIV Testing",
+      "date": "2026-07-20",
+      "notes": ""
+    }
+  ],
+  "patients": [
+    {
+      "patientId": "SIM126",
+      "password": "1234"
+    },
+    {
+      "patientId": "SIM500",
+      "password": "1234"
+    },
+    {
+      "patientId": "SIM124",
+      "password": "1234"
+    }
+  ]
+}

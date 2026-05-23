@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Add Patient</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f4f4f4;
+    padding:50px;
+}
+
+.box{
+    background:white;
+    max-width:500px;
+    margin:auto;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h2{
+    text-align:center;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    background:#555;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Create Patient Account</h2>
+
+<input
+type="text"
+id="patientId"
+placeholder="Patient ID (Example: SIM126)"
+>
+
+<input
+type="password"
+id="password"
+placeholder="Password"
+>
+
+<button onclick="savePatient()">
+Save Patient
+</button>
+
+</div>
+
+<script>
+
+function savePatient(){
+
+fetch("http://localhost:3000/patient", {
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body: JSON.stringify({
+
+patientId:
+document.getElementById(
+"patientId"
+).value,
+
+password:
+document.getElementById(
+"password"
+).value
+
+})
+
+})
+.then(res => res.json())
+.then(data => {
+
+alert(data.message);
+
+})
+.catch(err => {
+
+console.log(err);
+alert("Failed to save");
+
+});
+
+}
+
+</script>
+
+</body>
+</html>

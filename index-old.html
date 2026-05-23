@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMTAR MEDICAL LABORATORIES</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+    <div class="logo-icon">+</div>
+
+    <div>
+        <h1>SIMTAR</h1>
+        <p>MEDICAL LABORATORIES</p>
+    </div>
+</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Services</a>
+            <a href="#">Booking</a>
+            <a href="#">Patient Portal</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+
+        <section class="hero">
+
+    <h2>Accurate. Reliable. Trusted Diagnostics.</h2>
+
+    <p>
+        Welcome to SIMTAR MEDICAL LABORATORIES,
+        providing professional, fast and accurate
+        medical testing services you can trust.
+    </p>
+
+    <div>
+        <button onclick="bookAppointment()">
+            Book Appointment
+        </button>
+
+        <button onclick="patientPortal()">
+            Patient Results
+        </button>
+    </div>
+
+</section>
+
+    <section class="services">
+
+    <h2>Why Choose SIMTAR Medical Laboratories?</h2>
+
+    <div class="card">
+        <h3>Fast Results</h3>
+        <p>Quick and accurate laboratory reports.</p>
+    </div>
+
+    <div class="card">
+        <h3>Qualified Experts</h3>
+        <p>Experienced laboratory professionals.</p>
+    </div>
+
+    <div class="card">
+        <h3>Trusted Diagnostics</h3>
+        <p>Reliable testing with modern technology.</p>
+    </div>
+
+</section>
+
+<section class="booking">
+
+    <h2>Book an Appointment</h2>
+
+    <form id="bookingForm">
+
+        <input type="text" id="name" placeholder="Full Name" required>
+
+        <input type="tel" id="phone" placeholder="Phone Number" required>
+
+        <input type="email" id="email" placeholder="Email Address" required>
+
+        <select id="service" required>
+            <option value="">Select Test</option>
+            <option>Blood Testing</option>
+            <option>Urine Analysis</option>
+            <option>DNA / Paternity Testing</option>
+            <option>HIV & STI Testing</option>
+            <option>Wellness Screening</option>
+        </select>
+
+        <input type="date" id="date" required>
+
+        <button type="submit">
+            Book Appointment
+        </button>
+
+    </form>
+
+</section>
+
+    <section class="portal">
+
+    <h2>Patient Results Portal</h2>
+
+    <p>
+        Login securely to access your laboratory results
+    </p>
+
+    <form id="loginForm">
+
+        <input
+            type="text"
+            id="patientId"
+            placeholder="Patient ID"
+            required
+        >
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+        >
+
+        <button type="submit">
+            Login
+        </button>
+
+    </form>
+
+</section>
+<a
+href="https://wa.me/2637780652253"
+target="_blank"
+class="whatsapp-button"
+>
+    Chat With Us
+</a>
+<section class="contact">
+
+    <h2>Contact SIMTAR MEDICAL LABORATORIES</h2>
+
+    <div class="contact-box">
+
+        <div class="contact-card">
+            <h3>Phone</h3>
+            <p>+263 77 806 52253</p>
+        </div>
+
+        <div class="contact-card">
+            <h3>Email</h3>
+            <p>info@simtarmedlab.com</p>
+        </div>
+
+        <div class="contact-card">
+            <h3>Location</h3>
+            <p>Harare, Zimbabwe</p>
+        </div>
+
+    </div>
+
+</section>
+    <footer>
+        <p>© 2026 SIMTAR MEDICAL LABORATORIES</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

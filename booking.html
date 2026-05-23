@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Appointment - SIMTAR</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f5f5f5;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+padding:20px;
+}
+
+.container{
+background:white;
+padding:40px;
+width:100%;
+max-width:550px;
+border-radius:25px;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+h1{
+text-align:center;
+color:#444;
+margin-bottom:10px;
+}
+
+.subtitle{
+text-align:center;
+color:#777;
+margin-bottom:30px;
+}
+
+input,
+select,
+textarea{
+width:100%;
+padding:15px;
+margin-bottom:18px;
+border:1px solid #ddd;
+border-radius:12px;
+font-size:16px;
+outline:none;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+border-color:#777;
+}
+
+button{
+width:100%;
+padding:16px;
+border:none;
+border-radius:12px;
+background:#555;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#333;
+}
+
+.back-btn{
+display:block;
+text-align:center;
+margin-top:20px;
+text-decoration:none;
+color:#555;
+font-weight:600;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Book Appointment</h1>
+
+<p class="subtitle">
+SIMTAR MEDICAL LABORATORIES
+</p>
+
+<input
+type="text"
+id="name"
+placeholder="Full Name"
+>
+
+<input
+type="text"
+id="phone"
+placeholder="Phone Number"
+>
+
+<select id="service">
+<option value="">
+Select Test / Service
+</option>
+
+<option>Blood Test</option>
+<option>HIV Testing</option>
+<option>DNA Testing</option>
+<option>Pregnancy Test</option>
+<option>Diabetes Screening</option>
+<option>Urinalysis</option>
+
+</select>
+
+<input
+type="date"
+id="date"
+>
+
+<textarea
+id="notes"
+placeholder="Additional Notes (Optional)"
+rows="4"
+></textarea>
+
+<button onclick="bookAppointment()">
+Book Appointment
+</button>
+
+<a
+href="index.html"
+class="back-btn"
+>
+← Back to Home
+</a>
+
+</div>
+
+<script>
+
+function bookAppointment(){
+
+fetch(
+"http://localhost:3000/appointment",
+{
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body: JSON.stringify({
+
+name:
+document.getElementById(
+"name"
+).value,
+
+phone:
+document.getElementById(
+"phone"
+).value,
+
+service:
+document.getElementById(
+"service"
+).value,
+
+date:
+document.getElementById(
+"date"
+).value,
+
+notes:
+document.getElementById(
+"notes"
+).value
+
+})
+
+})
+.then(res => res.json())
+.then(data => {
+
+alert(
+"Appointment booked successfully!"
+);
+
+})
+.catch(err => {
+
+console.log(err);
+alert("Booking failed");
+
+});
+
+}
+
+</script>
+
+</body>
+</html>

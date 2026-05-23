@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SIMTAR Admin Dashboard</title>
+
+    <style>
+        .stats{
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    margin-bottom:30px;
+    flex-wrap:wrap;
+}
+
+.stat-card{
+    background:#555;
+    color:white;
+    width:250px;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+.stat-card h2{
+    font-size:40px;
+}
+        body{
+            font-family:Arial,sans-serif;
+            background:#f5f5f5;
+            padding:50px;
+        }
+
+        .container{
+            background:white;
+            max-width:700px;
+            margin:auto;
+            padding:40px;
+            border-radius:20px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        h1{
+            text-align:center;
+            margin-bottom:30px;
+        }
+
+        input{
+            width:100%;
+            padding:15px;
+            margin:10px 0;
+            border:1px solid #ddd;
+            border-radius:10px;
+        }
+
+        button{
+            background:#555;
+            color:white;
+            border:none;
+            padding:15px 30px;
+            border-radius:10px;
+            cursor:pointer;
+            width:100%;
+            margin-top:15px;
+        }
+
+        button:hover{
+            opacity:0.9;
+        }
+
+        table{
+            width:100%;
+            margin-top:30px;
+            border-collapse:collapse;
+        }
+
+        th, td{
+            border:1px solid #ddd;
+            padding:15px;
+            text-align:center;
+        }
+
+        th{
+            background:#555;
+            color:white;
+        }
+
+        #message{
+            text-align:center;
+            color:green;
+            margin-top:15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>SIMTAR ADMIN DASHBOARD</h1>
+<div class="stats">
+
+    <div class="stat-card">
+        <h2 id="totalPatients">
+            0
+        </h2>
+
+        <p>Total Patients</p>
+    </div>
+
+    <div class="stat-card">
+        <h2 id="totalResults">
+            0
+        </h2>
+
+        <p>Results Uploaded</p>
+    </div>
+
+</div>
+<input
+type="text"
+id="search"
+placeholder="Search Patient ID..."
+onkeyup="searchPatients()"
+>
+
+<input
+type="text"
+id="patientId"
+placeholder="Patient ID"
+>
+
+<input
+type="password"
+id="password"
+placeholder="Patient Password"
+>
+
+<input
+type="text"
+id="pdfName"
+placeholder="PDF Name (example: SIM500.pdf)"
+>
+
+<button onclick="savePatient()">
+Save Patient Result
+</button>
+
+<p id="message"></p>
+
+<table>
+
+<thead>
+<tr>
+<th>Patient ID</th>
+<th>Password</th>
+<th>PDF</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="patientList">
+
+</tbody>
+
+</table>
+
+</div>
+
+<script>
+
+function loadPatients(search=""){
+
+let patients =
+JSON.parse(
+localStorage.getItem(
+"patients"
+)
+) || {};
+
+let table =
+document.getElementById(
+"patientList"
+);
+
+table.innerHTML = "";
+
+for(let id in patients){
+
+if(
+id.toLowerCase()
+.includes(
+search.toLowerCase()
+)
+){
+
+table.innerHTML += `
+<tr>
+<td>${id}</td>
+<td>${patients[id].password}</td>
+<td>${patients[id].pdf}</td>
+
+<td>
+
+<button
+onclick="editPatient('${id}')"
+style="
+background:#3498db;
+margin:5px;
+width:auto;
+"
+>
+Edit
+</button>
+
+<button
+onclick="deletePatient('${id}')"
+style="
+background:#e74c3c;
+margin:5px;
+width:auto;
+"
+>
+Delete
+</button>
+
+</td>
+
+</tr>
+`;
+
+}
+
+}
+
+}
+
+function savePatient(){
+
+let patientId =
+document.getElementById(
+"patientId"
+).value
+.trim();
+
+let password =
+document.getElementById(
+"password"
+).value
+.trim();
+
+let pdfName =
+document.getElementById(
+"pdfName"
+).value
+.trim();
+
+if(
+!patientId
+||
+!password
+||
+!pdfName
+){
+
+alert(
+"Please fill all fields"
+);
+
+return;
+}
+
+let patients =
+JSON.parse(
+localStorage.getItem(
+"patients"
+)
+) || {};
+
+patients[patientId] = {
+
+password: password,
+pdf: pdfName
+
+};
+
+localStorage.setItem(
+"patients",
+JSON.stringify(
+patients
+)
+);
+
+document.getElementById(
+"message"
+).innerText =
+"Patient saved successfully!";
+
+document.getElementById(
+"patientId"
+).value = "";
+
+document.getElementById(
+"password"
+).value = "";
+
+document.getElementById(
+"pdfName"
+).value = "";
+
+updateStats();
+loadPatients();
+
+}
+
+function deletePatient(id){
+
+let confirmDelete =
+confirm(
+"Delete patient " +
+id +
+"?"
+);
+
+if(!confirmDelete){
+
+return;
+
+}
+
+let patients =
+JSON.parse(
+localStorage.getItem(
+"patients"
+)
+) || {};
+
+delete patients[id];
+
+localStorage.setItem(
+"patients",
+JSON.stringify(
+patients
+)
+);
+updateStats();
+loadPatients();
+
+}
+
+function editPatient(id){
+
+let patients =
+JSON.parse(
+localStorage.getItem(
+"patients"
+)
+) || {};
+
+document.getElementById(
+"patientId"
+).value =
+id;
+
+document.getElementById(
+"password"
+).value =
+patients[id]
+.password;
+
+document.getElementById(
+"pdfName"
+).value =
+patients[id]
+.pdf;
+
+}
+
+function searchPatients(){
+
+let search =
+document.getElementById(
+"search"
+).value;
+
+loadPatients(search);
+
+}
+
+updateStats();
+function updateStats(){
+
+let patients =
+JSON.parse(
+localStorage.getItem(
+"patients"
+)
+) || {};
+
+let total =
+Object.keys(
+patients
+).length;
+
+document
+.getElementById(
+"totalPatients"
+)
+.innerText =
+total;
+
+document
+.getElementById(
+"totalResults"
+)
+.innerText =
+total;
+
+}
+function updateStats(){
+
+let patients =
+JSON.parse(
+localStorage.getItem(
+"patients"
+)
+) || {};
+
+let total =
+Object.keys(
+patients
+).length;
+
+document
+.getElementById(
+"totalPatients"
+)
+.innerText =
+total;
+
+document
+.getElementById(
+"totalResults"
+)
+.innerText =
+total;
+
+}
+updateStats();
+loadPatients();
+
+</script>
+
+</body>
+</html>
+     
+
+   

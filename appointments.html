@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SIMTAR Appointments</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,sans-serif;
+        }
+
+        body{
+            background:#f4f4f4;
+            padding:40px;
+        }
+
+        .container{
+            background:white;
+            max-width:1200px;
+            margin:auto;
+            padding:40px;
+            border-radius:20px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        h1{
+            text-align:center;
+            margin-bottom:30px;
+            color:#444;
+        }
+
+        .stats{
+            display:flex;
+            justify-content:center;
+            gap:20px;
+            margin-bottom:30px;
+            flex-wrap:wrap;
+        }
+
+        .card{
+            background:#555;
+            color:white;
+            width:250px;
+            padding:30px;
+            border-radius:20px;
+            text-align:center;
+        }
+
+        .card h2{
+            font-size:40px;
+        }
+
+        input{
+            width:100%;
+            padding:15px;
+            border-radius:10px;
+            border:1px solid #ddd;
+            margin-bottom:20px;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:20px;
+        }
+
+        th, td{
+            border:1px solid #ddd;
+            padding:15px;
+            text-align:center;
+        }
+
+        th{
+            background:#555;
+            color:white;
+        }
+
+        button{
+            border:none;
+            padding:10px 15px;
+            border-radius:10px;
+            cursor:pointer;
+            color:white;
+        }
+
+        .delete{
+            background:#e74c3c;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>SIMTAR APPOINTMENTS</h1>
+
+    <div class="stats">
+
+        <div class="card">
+            <h2 id="totalAppointments">0</h2>
+            <p>Total Appointments</p>
+        </div>
+
+    </div>
+
+    <input
+    type="text"
+    id="search"
+    placeholder="Search patient name..."
+    onkeyup="searchAppointments()"
+    >
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Service</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody id="appointmentList">
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<script>
+
+function loadAppointments(search=""){
+
+let appointments =
+JSON.parse(
+localStorage.getItem(
+"appointments"
+)
+) || [];
+
+let table =
+document.getElementById(
+"appointmentList"
+);
+
+table.innerHTML = "";
+
+appointments.forEach(
+function(patient,index){
+
+if(
+patient.name
+.toLowerCase()
+.includes(
+search.toLowerCase()
+)
+){
+
+table.innerHTML += `
+<tr>
+<td>${patient.name}</td>
+<td>${patient.phone}</td>
+<td>${patient.email}</td>
+<td>${patient.service}</td>
+<td>${patient.date}</td>
+
+<td>
+<button
+class="delete"
+onclick="deleteAppointment(${index})"
+>
+Delete
+</button>
+</td>
+
+</tr>
+`;
+
+}
+
+});
+
+updateStats();
+
+}
+
+function deleteAppointment(index){
+
+let appointments =
+JSON.parse(
+localStorage.getItem(
+"appointments"
+)
+) || [];
+
+let confirmDelete =
+confirm(
+"Delete appointment?"
+);
+
+if(!confirmDelete){
+
+return;
+
+}
+
+appointments.splice(
+index,
+1
+);
+
+localStorage.setItem(
+"appointments",
+JSON.stringify(
+appointments
+)
+);
+
+loadAppointments();
+
+}
+
+function searchAppointments(){
+
+let search =
+document.getElementById(
+"search"
+).value;
+
+loadAppointments(search);
+
+}
+
+function updateStats(){
+
+let appointments =
+JSON.parse(
+localStorage.getItem(
+"appointments"
+)
+) || [];
+
+document
+.getElementById(
+"totalAppointments"
+)
+.innerText =
+appointments.length;
+
+}
+
+loadAppointments();
+
+</script>
+
+</body>
+</html>

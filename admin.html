@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SIMTAR Admin Dashboard</title>
+    <style>
+        body{
+            font-family:Arial,sans-serif;
+            background:#f4f4f4;
+            padding:40px;
+        }
+
+        h1{
+            text-align:center;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:white;
+            margin-top:30px;
+        }
+
+        th, td{
+            border:1px solid #ddd;
+            padding:15px;
+            text-align:center;
+        }
+
+        th{
+            background:#555;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>SIMTAR MEDICAL LABORATORIES BOOKINGS</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Service</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+
+        <tbody id="bookingList">
+
+        </tbody>
+    </table>
+
+<script>
+
+let bookings =
+JSON.parse(localStorage.getItem("appointments"))
+|| [];
+
+let table =
+document.getElementById("bookingList");
+
+bookings.forEach(function(patient){
+
+table.innerHTML += `
+<tr>
+<td>${patient.name}</td>
+<td>${patient.phone}</td>
+<td>${patient.email}</td>
+<td>${patient.service}</td>
+<td>${patient.date}</td>
+</tr>
+`;
+
+});
+
+</script>
+
+</body>
+</html>

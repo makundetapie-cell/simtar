@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Upload Patient Result</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            background:#f4f4f4;
+            padding:50px;
+        }
+
+        .box{
+            background:white;
+            max-width:500px;
+            margin:auto;
+            padding:30px;
+            border-radius:15px;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2{
+            text-align:center;
+        }
+
+        input{
+            width:100%;
+            padding:12px;
+            margin:10px 0;
+        }
+
+        button{
+            width:100%;
+            padding:14px;
+            background:#555;
+            color:white;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Upload Patient Result</h2>
+
+<input
+type="text"
+id="patientId"
+placeholder="Patient ID (Example: SIM126)"
+>
+
+<input
+type="file"
+id="pdf"
+accept=".pdf"
+>
+
+<button onclick="uploadResult()">
+Upload Result
+</button>
+
+</div>
+
+<script>
+
+function uploadResult(){
+
+    const patientId =
+    document.getElementById(
+        "patientId"
+    ).value;
+
+    const pdf =
+    document.getElementById(
+        "pdf"
+    ).files[0];
+
+    let formData =
+    new FormData();
+
+    formData.append(
+        "patientId",
+        patientId
+    );
+
+    formData.append(
+        "pdf",
+        pdf
+    );
+
+    fetch(
+    "http://localhost:3000/upload-result",
+    {
+        method:"POST",
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        alert(data.message);
+
+    })
+    .catch(err => {
+
+        console.log(err);
+        alert("Upload failed");
+
+    });
+
+}
+
+</script>
+
+</body>
+
+</html>

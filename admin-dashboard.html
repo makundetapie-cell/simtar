@@ -1,0 +1,738 @@
+# Replace Entire `admin-dashboard.html`
+
+Copy EVERYTHING below and replace your current `admin-dashboard.html` with it.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIMTAR Admin Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f5f5f5;
+display:flex;
+min-height:100vh;
+}
+
+.sidebar{
+width:260px;
+background:#444;
+color:white;
+padding:30px 20px;
+position:fixed;
+height:100%;
+overflow:auto;
+}
+
+.logo{
+font-size:24px;
+font-weight:700;
+margin-bottom:40px;
+text-align:center;
+}
+
+.menu{
+list-style:none;
+}
+
+.menu li{
+margin-bottom:15px;
+}
+
+.menu a{
+display:block;
+padding:14px;
+border-radius:10px;
+text-decoration:none;
+color:white;
+transition:0.3s;
+}
+
+.menu a:hover{
+background:#666;
+}
+
+.main{
+margin-left:260px;
+padding:30px;
+width:100%;
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+flex-wrap:wrap;
+gap:15px;
+}
+
+.header h1{
+color:#444;
+}
+
+.logout-btn{
+background:#555;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:10px;
+cursor:pointer;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-bottom:30px;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+.card h2{
+font-size:18px;
+color:#777;
+margin-bottom:10px;
+}
+
+.card p{
+font-size:35px;
+font-weight:bold;
+color:#333;
+}
+
+.actions{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-bottom:30px;
+}
+
+.action-card{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+text-align:center;
+}
+
+.action-card h3{
+margin-bottom:15px;
+color:#444;
+}
+
+.btn{
+display:inline-block;
+padding:12px 20px;
+background:#555;
+color:white;
+text-decoration:none;
+border-radius:10px;
+margin-top:10px;
+}
+
+.table-box{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+margin-bottom:30px;
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th, td{
+padding:15px;
+text-align:left;
+border-bottom:1px solid #eee;
+}
+
+th{
+background:#555;
+color:white;
+}
+
+.delete-btn{
+background:red;
+color:white;
+border:none;
+padding:8px 14px;
+border-radius:8px;
+cursor:pointer;
+margin-left:10px;
+}
+
+.status-dropdown{
+padding:10px;
+border:none;
+border-radius:10px;
+font-weight:600;
+background:#fff3cd;
+color:#856404;
+cursor:pointer;
+}
+
+.search-input{
+width:100%;
+padding:14px;
+margin-top:20px;
+margin-bottom:20px;
+border:1px solid #ddd;
+border-radius:12px;
+font-size:16px;
+}
+
+.badge-completed{
+background:#d4edda;
+color:#155724;
+padding:8px 14px;
+border-radius:20px;
+font-weight:600;
+}
+
+.badge-pending{
+background:#fff3cd;
+color:#856404;
+padding:8px 14px;
+border-radius:20px;
+font-weight:600;
+}
+
+@media(max-width:900px){
+
+body{
+flex-direction:column;
+}
+
+.sidebar{
+position:relative;
+width:100%;
+height:auto;
+}
+
+.main{
+margin-left:0;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">
+SIMTAR LAB
+</div>
+
+<ul class="menu">
+
+<li><a href="#">Dashboard</a></li>
+<li><a href="#patientsSection">Patients</a></li>
+<li><a href="#pendingSection">Pending</a></li>
+<li><a href="#resultsSection">Results</a></li>
+<li><a href="add-patient.html">Add Patient</a></li>
+<li><a href="upload-results.html">Upload Results</a></li>
+<li><a href="patient-portal.html">Patient Portal</a></li>
+<li><a href="#" onclick="logout()">Logout</a></li>
+
+</ul>
+
+</div>
+
+<div class="main">
+
+<div class="header">
+<h1>SIMTAR Admin Dashboard</h1>
+<button class="logout-btn" onclick="logout()">Logout</button>
+</div>
+
+<div class="stats">
+
+<div class="card">
+<h2>Total Appointments</h2>
+<p id="appointmentsCount">0</p>
+</div>
+
+<div class="card">
+<h2>Total Patients</h2>
+<p id="patientsCount">0</p>
+</div>
+
+<div class="card">
+<h2>Uploaded Results</h2>
+<p id="resultsCount">0</p>
+</div>
+
+</div>
+
+<div class="actions">
+
+<div class="action-card">
+<h3>Add New Patient</h3>
+<a href="add-patient.html" class="btn">Open</a>
+</div>
+
+<div class="action-card">
+<h3>Upload Lab Results</h3>
+<a href="upload-results.html" class="btn">Upload</a>
+</div>
+
+<div class="action-card">
+<h3>Patient Portal</h3>
+<a href="patient-portal.html" class="btn">Open</a>
+</div>
+
+</div>
+
+<div class="table-box">
+
+<h2>Appointments</h2>
+
+<input
+type="text"
+id="searchInput"
+class="search-input"
+placeholder="Search appointments..."
+onkeyup="searchAppointments()"
+>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Phone</th>
+<th>Service</th>
+<th>Date</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="appointmentsTable"></tbody>
+
+</table>
+
+</div>
+
+<div class="table-box" id="patientsSection">
+
+<h2>Patients</h2>
+
+<input
+type="text"
+id="patientSearch"
+class="search-input"
+placeholder="Search patient ID..."
+onkeyup="searchPatients()"
+>
+
+<table>
+<thead>
+<tr>
+<th>Patient ID</th>
+<th>Password</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="patientsTable"></tbody>
+
+</table>
+
+</div>
+
+<div class="table-box" id="pendingSection">
+
+<h2>Pending Results</h2>
+
+<table>
+<thead>
+<tr>
+<th>Patient ID</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody id="pendingTable"></tbody>
+
+</table>
+
+</div>
+
+<div class="table-box" id="resultsSection">
+
+<h2>Completed Results</h2>
+
+<table>
+<thead>
+<tr>
+<th>Patient ID</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="resultsTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+const token = localStorage.getItem("token");
+
+if(!token){
+window.location.href = "admin-login.html";
+}
+
+function logout(){
+localStorage.removeItem("token");
+window.location.href = "admin-login.html";
+}
+
+function loadAppointments(){
+
+fetch("http://localhost:3000/appointments")
+.then(res => res.json())
+.then(data => {
+
+const table = document.getElementById("appointmentsTable");
+
+ document.getElementById("appointmentsCount").innerText = data.length;
+
+ table.innerHTML = "";
+
+ data.forEach((item, index) => {
+
+ table.innerHTML += `
+ <tr>
+ <td>${item.name}</td>
+ <td>${item.phone}</td>
+ <td>${item.service}</td>
+ <td>${item.date}</td>
+ <td>
+ <select class="status-dropdown" onchange="changeStatus(this)">
+ <option value="pending">Pending</option>
+ <option value="completed">Completed</option>
+ <option value="urgent">Urgent</option>
+ </select>
+ </td>
+ <td>
+ <button class="delete-btn" onclick="deleteAppointment(${index})">
+ Delete
+ </button>
+ </td>
+ </tr>
+ `;
+
+ });
+
+});
+
+}
+
+function deleteAppointment(index){
+
+fetch(
+"http://localhost:3000/appointment/" + index,
+{
+method:"DELETE"
+}
+)
+.then(() => {
+loadAppointments();
+});
+
+}
+
+function changeStatus(select){
+
+if(select.value === "pending"){
+select.style.background = "#fff3cd";
+select.style.color = "#856404";
+}
+
+if(select.value === "completed"){
+select.style.background = "#d4edda";
+select.style.color = "#155724";
+}
+
+if(select.value === "urgent"){
+select.style.background = "#f8d7da";
+select.style.color = "#721c24";
+}
+
+}
+
+function searchAppointments(){
+
+const input = document.getElementById("searchInput").value.toLowerCase();
+const rows = document.querySelectorAll("#appointmentsTable tr");
+
+rows.forEach(row => {
+
+const text = row.innerText.toLowerCase();
+row.style.display = text.includes(input) ? "" : "none";
+
+});
+
+}
+
+function loadPatients(){
+
+fetch("http://localhost:3000/patients")
+.then(res => res.json())
+.then(data => {
+
+const table = document.getElementById("patientsTable");
+
+ document.getElementById("patientsCount").innerText = data.length;
+
+ table.innerHTML = "";
+
+ data.forEach((patient, index) => {
+
+ table.innerHTML += `
+ <tr>
+ <td>${patient.patientId}</td>
+ <td>${patient.password}</td>
+
+<td>
+
+<button
+class="btn"
+onclick="editPatient(
+${index},
+'${patient.patientId}',
+'${patient.password}'
+)"
+>
+Edit
+</button>
+
+</td>
+ </tr>
+ `;
+
+ });
+
+});
+
+}
+
+function searchPatients(){
+
+const input = document.getElementById("patientSearch").value.toLowerCase();
+const rows = document.querySelectorAll("#patientsTable tr");
+
+rows.forEach(row => {
+
+const text = row.innerText.toLowerCase();
+row.style.display = text.includes(input) ? "" : "none";
+
+});
+
+}
+
+function loadResultsTable(){
+
+fetch("http://localhost:3000/results-list")
+.then(res => res.json())
+.then(files => {
+
+const table = document.getElementById("resultsTable");
+
+document.getElementById("resultsCount").innerText = files.length;
+
+table.innerHTML = "";
+
+files.forEach(file => {
+
+const patientId = file.replace(".pdf", "");
+
+table.innerHTML += `
+<tr>
+<td>${patientId}</td>
+<td>
+<span class="badge-completed">Completed</span>
+</td>
+<td>
+<a
+href="http://localhost:3000/results/${file}"
+target="_blank"
+class="btn"
+>
+Open PDF
+</a>
+
+<button
+class="delete-btn"
+onclick="deleteResult('${file}')"
+>
+Delete
+</button>
+
+</td>
+</tr>
+`;
+
+});
+
+});
+
+}
+
+function loadPendingResults(){
+
+Promise.all([
+fetch("http://localhost:3000/patients").then(res => res.json()),
+fetch("http://localhost:3000/results-list").then(res => res.json())
+])
+.then(([patients, files]) => {
+
+const table = document.getElementById("pendingTable");
+
+table.innerHTML = "";
+
+patients.forEach(patient => {
+
+const exists = files.includes(patient.patientId + ".pdf");
+
+if(!exists){
+
+ table.innerHTML += `
+ <tr>
+ <td>${patient.patientId}</td>
+ <td>
+ <span class="badge-pending">Pending</span>
+ </td>
+ </tr>
+ `;
+
+}
+
+});
+
+});
+
+}
+/* EDIT PATIENT */
+
+function editPatient(
+index,
+currentId,
+currentPassword
+){
+
+const newId = prompt(
+"Edit Patient ID:",
+currentId
+);
+
+if(newId === null) return;
+
+const newPassword = prompt(
+"Edit Password:",
+currentPassword
+);
+
+if(newPassword === null) return;
+
+fetch(
+"http://localhost:3000/patients"
+)
+.then(res => res.json())
+.then(data => {
+
+data[index].patientId =
+newId;
+
+data[index].password =
+newPassword;
+
+fetch(
+"http://localhost:3000/save-patients",
+{
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body: JSON.stringify(data)
+
+})
+.then(res => res.json())
+.then(() => {
+
+alert(
+"Patient updated"
+);
+
+loadPatients();
+
+loadPendingResults();
+
+});
+
+});
+
+}
+function deleteResult(file){
+
+fetch(
+"http://localhost:3000/delete-result/" + file,
+{
+method:"DELETE"
+}
+)
+.then(res => res.json())
+.then(() => {
+
+loadResultsTable();
+loadPendingResults();
+
+});
+
+}
+
+loadAppointments();
+loadPatients();
+loadResultsTable();
+loadPendingResults();
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Results</title>
+
+    <style>
+        body{
+            font-family:Arial,sans-serif;
+            background:#f4f4f4;
+            text-align:center;
+            padding:80px;
+        }
+
+        .container{
+            background:white;
+            max-width:600px;
+            margin:auto;
+            padding:40px;
+            border-radius:20px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        button{
+            background:#555;
+            color:white;
+            border:none;
+            padding:15px 30px;
+            border-radius:10px;
+            cursor:pointer;
+            margin-top:20px;
+        }
+
+        a{
+            text-decoration:none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>SIMTAR MEDICAL LABORATORIES</h1>
+
+<h2>Patient Results Ready</h2>
+
+<p id="patientText"></p>
+
+<a id="pdfLink" target="_blank">
+    <button>View Results PDF</button>
+</a>
+
+</div>
+
+    <script>
+
+let patientId =
+localStorage.getItem(
+"loggedInPatient"
+);
+
+let patients =
+JSON.parse(
+localStorage.getItem(
+"patients"
+)
+) || {};
+
+if(
+    patientId
+    &&
+    patients[patientId]
+){
+
+document
+.getElementById(
+"patientText"
+)
+.innerText =
+"Patient ID: " +
+patientId;
+
+document
+.getElementById(
+"pdfLink"
+)
+.href =
+"./results/" +
+patients[patientId].pdf;
+
+} else {
+
+alert(
+"Patient result not found."
+);
+
+window.location.href =
+"index.html";
+
+}
+
+
+</script>
+
+</body>
+</html>
