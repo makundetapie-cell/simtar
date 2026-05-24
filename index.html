@@ -889,6 +889,52 @@ font-size:14px;
 }
 
 }
+/* FINAL MOBILE NAV FIX */
+
+@media(max-width:768px){
+
+.navbar{
+display:flex !important;
+flex-direction:column !important;
+align-items:center !important;
+justify-content:center !important;
+padding:20px !important;
+}
+
+.nav-links{
+display:flex !important;
+flex-direction:row !important;
+flex-wrap:nowrap !important;
+
+justify-content:center !important;
+align-items:center !important;
+
+gap:12px !important;
+
+width:100% !important;
+
+overflow-x:auto !important;
+white-space:nowrap !important;
+
+padding:0 !important;
+margin:0 !important;
+
+list-style:none !important;
+}
+
+.nav-links li{
+display:inline-block !important;
+}
+
+.nav-links a{
+font-size:14px !important;
+}
+
+.nav-links::-webkit-scrollbar{
+display:none;
+}
+
+}
 </style>
 </head>
 
