@@ -12,7 +12,152 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-   
+    /* TESTIMONIALS */
+
+.testimonials{
+padding:100px 8%;
+text-align:center;
+}
+
+.testimonial-slider{
+position:relative;
+max-width:800px;
+margin:auto;
+overflow:hidden;
+}
+
+.testimonial{
+display:none;
+
+background:white;
+
+padding:40px;
+
+border-radius:25px;
+
+box-shadow:
+0 8px 30px rgba(0,0,0,0.08);
+
+animation:fadeSlide 1s ease;
+}
+
+.testimonial.active{
+display:block;
+}
+
+.testimonial p{
+font-size:22px;
+line-height:1.7;
+color:#333;
+margin-bottom:20px;
+}
+
+.testimonial h4{
+color:#0066ff;
+font-size:18px;
+}
+
+/* ANIMATION */
+
+@keyframes fadeSlide{
+
+from{
+opacity:0;
+transform:translateX(40px);
+}
+
+to{
+opacity:1;
+transform:translateX(0);
+}
+
+}
+   /* LOADING SCREEN */
+
+#loader{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+background:
+linear-gradient(
+135deg,
+#0b1f4d,
+#0066ff
+);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+z-index:20000;
+
+transition:opacity 0.8s ease;
+}
+
+.loader-content{
+text-align:center;
+color:white;
+}
+
+.loader-logo{
+width:100px;
+height:100px;
+object-fit:contain;
+
+animation:floatLogo 2s ease-in-out infinite;
+}
+
+.loader-content h1{
+margin-top:20px;
+font-size:38px;
+letter-spacing:2px;
+}
+
+.loading-bar{
+width:260px;
+height:10px;
+
+background:rgba(255,255,255,0.2);
+
+border-radius:20px;
+
+margin:25px auto;
+
+overflow:hidden;
+}
+
+.loading-fill{
+height:100%;
+width:0%;
+
+background:white;
+
+border-radius:20px;
+
+animation:loading 3s forwards;
+}
+
+.loader-content p{
+font-size:15px;
+color:#dbeafe;
+}
+
+/* ANIMATIONS */
+
+@keyframes loading{
+
+0%{
+width:0%;
+}
+
+100%{
+width:100%;
+}
+
+}
 
 
     /* CHATBOT */
@@ -188,6 +333,7 @@ transform:scale(1);
 }
 
 }
+
     /* FOOTER */
 
 footer{
@@ -939,6 +1085,32 @@ display:none;
 </head>
 
 <body>
+    <!-- LOADER -->
+
+<div id="loader">
+
+<div class="loader-content">
+
+<img
+src="images/logo.png"
+class="loader-logo"
+>
+
+<h1>SIMTAR LABS</h1>
+
+<div class="loading-bar">
+
+<div class="loading-fill"></div>
+
+</div>
+
+<p>
+Loading Medical Services...
+</p>
+
+</div>
+
+</div>
     <nav class="navbar">
 
 <div class="logo-box">
@@ -1225,6 +1397,53 @@ WhatsApp Us
 
 </section>
 <section class="newsletter">
+    <section class="testimonials">
+
+<h2 class="section-title">
+What Patients Say
+</h2>
+
+<div class="testimonial-slider">
+
+<div class="testimonial active">
+
+<p>
+“Fast and professional laboratory services. Highly recommended.”
+</p>
+
+<h4>
+— Tendai M.
+</h4>
+
+</div>
+
+<div class="testimonial">
+
+<p>
+“Very accurate results and excellent customer care.”
+</p>
+
+<h4>
+— Rufaro C.
+</h4>
+
+</div>
+
+<div class="testimonial">
+
+<p>
+“Booking appointments online was very easy and convenient.”
+</p>
+
+<h4>
+— Nyasha T.
+</h4>
+
+</div>
+
+</div>
+
+</section>
 
 <h2>
 Sign up for Diagnofirm Newsletter
@@ -1509,6 +1728,79 @@ value + '+';
 animate();
 
 });
+
+</script>
+<script>
+
+/* LOADER */
+
+window.addEventListener(
+'load',
+() => {
+
+setTimeout(() => {
+
+document.getElementById(
+'loader'
+).style.opacity = '0';
+
+setTimeout(() => {
+
+document.getElementById(
+'loader'
+).style.display = 'none';
+
+}, 800);
+
+}, 2500);
+
+});
+</script>
+<script>
+
+/* TESTIMONIAL SLIDER */
+
+const testimonials =
+document.querySelectorAll(
+'.testimonial'
+);
+
+let currentTestimonial = 0;
+
+function showTestimonial(){
+
+testimonials.forEach(testimonial => {
+
+testimonial.classList.remove(
+'active'
+);
+
+});
+
+testimonials[
+currentTestimonial
+].classList.add(
+'active'
+);
+
+currentTestimonial++;
+
+if(
+currentTestimonial >= testimonials.length
+){
+
+currentTestimonial = 0;
+
+}
+
+}
+
+showTestimonial();
+
+setInterval(
+showTestimonial,
+4000
+);
 
 </script>
 </body>
