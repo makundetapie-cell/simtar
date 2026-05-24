@@ -1196,22 +1196,30 @@ WhatsApp Us
 <section class="stats">
 
 <div class="stat-box">
-<h1>100+</h1>
+<h1 class="counter" data-target="500">
+0
+</h1>
 <p>Patients Served</p>
 </div>
 
 <div class="stat-box">
-<h1>99%</h1>
+<h1 class="counter" data-target="99">
+0
+</h1>
 <p>Accuracy Rate</p>
 </div>
 
 <div class="stat-box">
-<h1>24/7</h1>
+<h1 class="counter" data-target="24">
+0
+</h1>
 <p>Support Available</p>
 </div>
 
 <div class="stat-box">
-<h1>15+</h1>
+<h1 class="counter" data-target="15">
+0
+</h1>
 <p>Lab Specialists</p>
 </div>
 
@@ -1426,6 +1434,81 @@ messages.scrollHeight;
 input.value = '';
 
 }
+
+</script>
+<script>
+
+/* COUNTER ANIMATION */
+
+const counters =
+document.querySelectorAll(
+'.counter'
+);
+
+const speed = 200;
+
+counters.forEach(counter => {
+
+const animate = () => {
+
+const value =
++counter.getAttribute(
+'data-target'
+);
+
+const data =
++counter.innerText;
+
+const time =
+value / speed;
+
+if(data < value){
+
+counter.innerText =
+Math.ceil(data + time);
+
+setTimeout(
+animate,
+15
+);
+
+}else{
+
+if(value === 99){
+
+counter.innerText =
+value + '%';
+
+}
+
+else if(value === 24){
+
+counter.innerText =
+value + '/7';
+
+}
+
+else if(value === 15){
+
+counter.innerText =
+value + '+';
+
+}
+
+else{
+
+counter.innerText =
+value + '+';
+
+}
+
+}
+
+};
+
+animate();
+
+});
 
 </script>
 </body>
