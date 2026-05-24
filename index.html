@@ -12,6 +12,369 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+    /* CHATBOT */
+
+.chatbot-container{
+position:fixed;
+bottom:100px;
+right:25px;
+width:340px;
+background:white;
+border-radius:20px;
+overflow:hidden;
+
+box-shadow:
+0 10px 35px rgba(0,0,0,0.2);
+
+display:none;
+flex-direction:column;
+
+z-index:9999;
+}
+
+.chatbot-header{
+background:
+linear-gradient(
+90deg,
+#0066ff,
+#00b4ff
+);
+
+color:white;
+padding:18px;
+font-weight:700;
+text-align:center;
+}
+
+.chatbot-messages{
+height:300px;
+overflow-y:auto;
+padding:15px;
+background:#f8fbff;
+}
+
+.bot-message,
+.user-message{
+padding:12px 15px;
+border-radius:15px;
+margin-bottom:12px;
+max-width:85%;
+font-size:14px;
+}
+
+.bot-message{
+background:#e0edff;
+color:#0b1f4d;
+}
+
+.user-message{
+background:#0066ff;
+color:white;
+margin-left:auto;
+}
+
+.chatbot-input{
+display:flex;
+border-top:1px solid #ddd;
+}
+
+.chatbot-input input{
+flex:1;
+padding:15px;
+border:none;
+outline:none;
+font-size:14px;
+}
+
+.chatbot-input button{
+border:none;
+padding:15px;
+background:#0066ff;
+color:white;
+cursor:pointer;
+}
+
+.chat-toggle{
+position:fixed;
+bottom:25px;
+right:25px;
+
+width:70px;
+height:70px;
+
+border:none;
+border-radius:50%;
+
+background:
+linear-gradient(
+135deg,
+#0066ff,
+#00b4ff
+);
+
+color:white;
+font-size:28px;
+
+cursor:pointer;
+
+box-shadow:
+0 8px 25px rgba(0,0,0,0.25);
+
+z-index:10000;
+}
+    /* PAGE ANIMATIONS */
+
+.fade-up{
+opacity:0;
+transform:translateY(40px);
+animation:fadeUp 1s ease forwards;
+}
+
+.fade-left{
+opacity:0;
+transform:translateX(-40px);
+animation:fadeLeft 1s ease forwards;
+}
+
+.fade-right{
+opacity:0;
+transform:translateX(40px);
+animation:fadeRight 1s ease forwards;
+}
+
+.zoom-in{
+opacity:0;
+transform:scale(0.8);
+animation:zoomIn 1s ease forwards;
+}
+
+/* KEYFRAMES */
+
+@keyframes fadeUp{
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+@keyframes fadeLeft{
+
+to{
+opacity:1;
+transform:translateX(0);
+}
+
+}
+
+@keyframes fadeRight{
+
+to{
+opacity:1;
+transform:translateX(0);
+}
+
+}
+
+@keyframes zoomIn{
+
+to{
+opacity:1;
+transform:scale(1);
+}
+
+}
+    /* FOOTER */
+
+footer{
+background:#0b1f4d;
+color:white;
+text-align:center;
+padding:60px 20px;
+margin-top:60px;
+}
+
+footer h2{
+margin-bottom:15px;
+}
+
+.socials{
+margin:25px 0;
+display:flex;
+justify-content:center;
+gap:20px;
+}
+
+.socials img{
+width:40px;
+height:40px;
+transition:0.3s;
+}
+
+.socials img:hover{
+transform:scale(1.15);
+}
+
+.copyright{
+margin-top:20px;
+color:#cbd5e1;
+}
+    /* STATS */
+
+.stats{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+
+gap:25px;
+padding:80px 8%;
+}
+
+.stat-box{
+background:white;
+padding:40px;
+border-radius:20px;
+text-align:center;
+
+box-shadow:
+0 6px 25px rgba(0,0,0,0.08);
+
+transition:0.3s;
+}
+
+.stat-box:hover{
+transform:translateY(-8px);
+background:
+linear-gradient(
+135deg,
+#0066ff,
+#00b4ff
+);
+
+color:white;
+}
+
+.stat-box h1{
+font-size:48px;
+margin-bottom:10px;
+}
+    /* WHATSAPP FLOAT */
+
+.whatsapp-float{
+position:fixed;
+bottom:25px;
+right:25px;
+width:70px;
+height:70px;
+background:#25D366;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+box-shadow:
+0 8px 25px rgba(0,0,0,0.25);
+
+z-index:999;
+animation:pulse 2s infinite;
+}
+
+.whatsapp-float img{
+width:38px;
+height:38px;
+}
+
+@keyframes pulse{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.08);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+    .card-icon{
+width:70px;
+height:70px;
+margin-bottom:20px;
+object-fit:contain;
+}
+/* NEWSLETTER */
+
+.newsletter{
+margin:80px auto;
+width:90%;
+max-width:1100px;
+padding:60px 40px;
+border-radius:25px;
+
+background:
+linear-gradient(
+135deg,
+#0b1f4d,
+#0066ff
+);
+
+text-align:center;
+color:white;
+
+box-shadow:
+0 12px 35px rgba(0,102,255,0.25);
+}
+
+.newsletter h2{
+font-size:38px;
+margin-bottom:15px;
+}
+
+.newsletter p{
+font-size:18px;
+margin-bottom:30px;
+color:#dbeafe;
+}
+
+.newsletter-box{
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.newsletter-box input{
+width:320px;
+padding:16px;
+border:none;
+border-radius:12px;
+font-size:16px;
+outline:none;
+}
+
+.newsletter-box button{
+padding:16px 28px;
+border:none;
+border-radius:12px;
+
+background:white;
+color:#0066ff;
+
+font-size:16px;
+font-weight:700;
+cursor:pointer;
+transition:0.3s;
+}
+
+.newsletter-box button:hover{
+transform:translateY(-3px);
+background:#dbeafe;
+}    
+
+
 
 *{
 margin:0;
@@ -22,92 +385,174 @@ scroll-behavior:smooth;
 }
 
 body{
-background:#f5f5f5;
-color:#333;
+background:
+linear-gradient(
+135deg,
+#eef6ff,
+#ffffff,
+#dceeff
+);
+color:#222;
+min-height:100vh;
 }
 
 /* NAVBAR */
 
-nav{
-background:white;
+.navbar{
+position:sticky;
+top:0;
+width:100%;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:20px 8%;
-box-shadow:0 2px 10px rgba(0,0,0,0.08);
-position:sticky;
-top:0;
+padding:15px 40px;
+background:
+linear-gradient(
+90deg,
+#0b1f4d,
+#0066ff
+);
+box-shadow:0 4px 20px rgba(0,0,0,0.15);
 z-index:1000;
 }
 
-.logo{
-font-size:24px;
-font-weight:700;
-color:#444;
-}
-
-nav ul{
+.logo-box{
 display:flex;
-list-style:none;
-gap:30px;
+align-items:center;
+gap:12px;
 }
 
-nav ul li a{
+.logo-img{
+width:55px;
+height:55px;
+object-fit:contain;
+}
+
+.logo-box h2{
+font-size:18px;
+font-weight:700;
+color:white;
+}
+
+.nav-links{
+display:flex;
+gap:25px;
+list-style:none;
+}
+
+.nav-links a{
 text-decoration:none;
-color:#444;
-font-weight:500;
+color:white;
+font-weight:600;
 transition:0.3s;
 }
 
-nav ul li a:hover{
-color:#777;
+.nav-links a:hover{
+color:#7dd3fc;
 }
 
 /* HERO */
 
 .hero{
 height:90vh;
-background:
-linear-gradient(rgba(50,50,50,0.5),
-rgba(50,50,50,0.5)),
-url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2070&auto=format&fit=crop');
-background-size:cover;
-background-position:center;
+position:relative;
+overflow:hidden;
 display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
-padding:20px;
 color:white;
 }
 
+.hero::before{
+content:'';
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background-size:cover;
+background-position:center;
+animation:slideShow 18s infinite;
+z-index:-2;
+}
+
+.hero::after{
+content:'';
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+linear-gradient(
+rgba(11,31,77,0.72),
+rgba(0,102,255,0.55)
+);
+z-index:-1;
+}
+
+/* SLIDESHOW */
+
+@keyframes slideShow{
+
+0%{
+background-image:
+url('https://images.unsplash.com/photo-1579154204601-01588f351e67?q=100&w=2400&auto=format&fit=crop');
+}
+
+33%{
+background-image:
+url('https://images.unsplash.com/photo-1581595219315-a187dd40c322?q=100&w=2400&auto=format&fit=crop');
+}
+
+66%{
+background-image:
+url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=100&w=2400&auto=format&fit=crop');
+}
+
+100%{
+background-image:
+url('https://images.unsplash.com/photo-1579154204601-01588f351e67?q=100&w=2400&auto=format&fit=crop');
+}
+
+}
 .hero-content h1{
-font-size:55px;
+font-size:60px;
 margin-bottom:20px;
 }
 
 .hero-content p{
-font-size:20px;
+font-size:22px;
 margin-bottom:30px;
 }
+
+/* BUTTONS */
 
 .btn{
 display:inline-block;
 padding:15px 30px;
-background:#555;
+background:
+linear-gradient(
+90deg,
+#00b4ff,
+#0066ff
+);
 color:white;
 text-decoration:none;
-border-radius:10px;
+border-radius:12px;
 margin:10px;
+font-weight:600;
 transition:0.3s;
+box-shadow:
+0 6px 20px rgba(0,102,255,0.3);
 }
 
 .btn:hover{
-background:#333;
-transform:translateY(-2px);
+transform:translateY(-3px);
 }
 
-/* SECTION */
+/* SECTIONS */
 
 section{
 padding:80px 8%;
@@ -115,50 +560,73 @@ padding:80px 8%;
 
 .section-title{
 text-align:center;
-font-size:38px;
+font-size:40px;
 margin-bottom:50px;
-color:#444;
+color:#0b1f4d;
 }
 
-/* SERVICES */
+/* CARDS */
 
-.services{
+.services,
+.why-us,
+.online-services{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+grid-template-columns:
+repeat(3,1fr);
+
 gap:25px;
+}
+@media(max-width:900px){
+
+.services,
+.why-us,
+.online-services{
+
+grid-template-columns:
+1fr;
+
+}
+
 }
 
 .card{
 background:white;
 padding:30px;
 border-radius:20px;
-box-shadow:0 4px 20px rgba(0,0,0,0.08);
+box-shadow:
+0 6px 25px rgba(0,0,0,0.08);
 transition:0.3s;
+border-top:5px solid #0066ff;
 }
 
 .card:hover{
-transform:translateY(-8px);
+transform:translateY(-10px) scale(1.03);
+
+background:
+linear-gradient(
+135deg,
+#0066ff,
+#00b4ff
+);
+
+color:white;
+
+box-shadow:
+0 12px 35px rgba(0,102,255,0.35);
+
+transition:0.4s;
+}
+.card:hover h3{
+color:white;
+}
+
+.card:hover p{
+color:#eef6ff;
 }
 
 .card h3{
 margin-bottom:15px;
-color:#444;
-}
-
-/* WHY US */
-
-.why-us{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-}
-
-/* ONLINE */
-
-.online-services{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:30px;
+color:#0b1f4d;
 }
 
 /* CONTACT */
@@ -167,65 +635,98 @@ gap:30px;
 background:white;
 border-radius:20px;
 padding:40px;
-box-shadow:0 4px 20px rgba(0,0,0,0.08);
+box-shadow:
+0 6px 25px rgba(0,0,0,0.08);
 text-align:center;
 }
 
 /* FOOTER */
 
 footer{
-background:#444;
+background:#0b1f4d;
 color:white;
 text-align:center;
 padding:25px;
 margin-top:50px;
 }
 
+/* MOBILE */
+
 @media(max-width:768px){
 
-.hero-content h1{
-font-size:38px;
+.navbar{
+flex-direction:column;
+gap:15px;
+padding:20px;
 }
 
-nav{
-flex-direction:column;
+.nav-links{
+flex-wrap:wrap;
+justify-content:center;
 gap:15px;
 }
 
-nav ul{
-flex-wrap:wrap;
-justify-content:center;
+.hero-content h1{
+font-size:40px;
+}
+
+.hero-content p{
+font-size:18px;
+}
+
+.logo-box h2{
+font-size:16px;
+text-align:center;
 }
 
 }
+
 
 </style>
 </head>
 
 <body>
+    <nav class="navbar">
 
-<nav>
+<div class="logo-box">
 
-<div class="logo">
-SIMTAR MEDICAL LABORATORIES
+<img
+src="images/logo.png"
+alt="SIMTAR Logo"
+class="logo-img"
+>
+
+<h2>SIMTAR MEDICAL LABORATORIES</h2>
+
 </div>
 
-<ul>
+<ul class="nav-links">
+
+<li><a href="index.html">Home</a></li>
+
 <li><a href="#services">Services</a></li>
+
 <li><a href="#about">About</a></li>
-<li><a href="#contact">Contact</a></li>
+
+<li><a href="booking.html">Book Appointment</a></li>
+
+<li><a href="patient-portal.html">Patient Portal</a></li>
+
 </ul>
+
 
 </nav>
 
+
+
 <section class="hero">
 
-<div class="hero-content">
+<div class="hero-content fade-up"></div>
 
 <h1>Accurate Diagnostics. Trusted Results.</h1>
 
 <p>
-Professional Medical Laboratory Services in Chiredzi, Zimbabwe
+Professional Medical Laboratory Services.
 </p>
 
 <a href="booking.html" class="btn">
@@ -246,36 +747,96 @@ Patient Portal
 Our Services
 </h2>
 
-<div class="services">
+<div class="services fade-left">
 
 <div class="card">
+
+<img
+src="https://cdn-icons-png.flaticon.com/512/2966/2966486.png"
+class="card-icon"
+>
+
 <h3>Blood Testing</h3>
-<p>Accurate and reliable blood analysis.</p>
+
+<p>
+Accurate and reliable blood analysis.
+</p>
+
 </div>
 
 <div class="card">
+
+<img
+src="https://cdn-icons-png.flaticon.com/512/2785/2785819.png"
+class="card-icon"
+>
+
 <h3>HIV Testing</h3>
-<p>Confidential and professional testing.</p>
+
+<p>
+Confidential and professional testing.
+</p>
+
 </div>
 
 <div class="card">
+
+<img
+src="https://cdn-icons-png.flaticon.com/512/2941/2941552.png"
+class="card-icon"
+>
+
 <h3>DNA Testing</h3>
-<p>Advanced laboratory DNA diagnostics.</p>
+
+<p>
+Advanced laboratory DNA diagnostics.
+</p>
+
 </div>
 
 <div class="card">
+
+<img
+src="https://cdn-icons-png.flaticon.com/512/4320/4320371.png"
+class="card-icon"
+>
+
 <h3>Pregnancy Tests</h3>
-<p>Fast and accurate pregnancy screening.</p>
+
+<p>
+Fast and accurate pregnancy screening.
+</p>
+
 </div>
 
 <div class="card">
+
+<img
+src="https://cdn-icons-png.flaticon.com/512/3774/3774299.png"
+class="card-icon"
+>
+
 <h3>Diabetes Screening</h3>
-<p>Monitor and manage your health.</p>
+
+<p>
+Monitor and manage your health.
+</p>
+
 </div>
 
 <div class="card">
+
+<img
+src="https://cdn-icons-png.flaticon.com/512/4320/4320337.png"
+class="card-icon"
+>
+
 <h3>Urinalysis</h3>
-<p>Comprehensive urine testing services.</p>
+
+<p>
+Comprehensive urine testing services.
+</p>
+
 </div>
 
 </div>
@@ -288,7 +849,7 @@ Our Services
 Why Choose SIMTAR
 </h2>
 
-<div class="why-us">
+<div class="why-us fade-right">
 
 <div class="card">
 <h3>Fast Results</h3>
@@ -320,36 +881,41 @@ Why Choose SIMTAR
 Online Services
 </h2>
 
-<div class="online-services">
+<div class="online-services zoom-in">
 
 <div class="card">
 <h3>Book Appointment</h3>
 <p>Schedule your visit online.</p>
+
 <a href="booking.html" class="btn">
 Book Now
 </a>
+
 </div>
 
 <div class="card">
 <h3>Patient Results Portal</h3>
 <p>Access results securely online.</p>
+
 <a href="patient-portal.html" class="btn">
 View Results
 </a>
+
 </div>
 
 <div class="card">
 <h3>Admin Portal</h3>
 <p>Staff management dashboard.</p>
+
 <a href="admin-login.html" class="btn">
 Admin Login
 </a>
+
 </div>
 
 </div>
 
 </section>
-
 <section id="contact">
 
 <h2 class="section-title">
@@ -377,14 +943,240 @@ WhatsApp Us
 </div>
 
 </section>
+<section class="stats">
 
-<footer>
+<div class="stat-box">
+<h1>100+</h1>
+<p>Patients Served</p>
+</div>
+
+<div class="stat-box">
+<h1>99%</h1>
+<p>Accuracy Rate</p>
+</div>
+
+<div class="stat-box">
+<h1>24/7</h1>
+<p>Support Available</p>
+</div>
+
+<div class="stat-box">
+<h1>15+</h1>
+<p>Lab Specialists</p>
+</div>
+
+</section>
+<section class="newsletter">
+
+<h2>
+Sign up for Diagnofirm Newsletter
+</h2>
 
 <p>
-© 2026 SIMTAR MEDICAL LABORATORIES | All Rights Reserved
+Receive the latest diagnostics and health information.
+</p>
+
+<section class="newsletter fade-up"></section>
+
+<input
+type="email"
+placeholder="Enter your email address"
+>
+
+<button>
+Subscribe
+</button>
+
+</div>
+
+</section>
+<footer>
+
+<h2>SIMTAR MEDICAL LABORATORIES</h2>
+
+<p>
+Professional Diagnostics & Healthcare Services
+</p>
+
+<div class="socials">
+
+<a href="#">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
+</a>
+
+<a href="#">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733558.png">
+</a>
+
+<a href="#">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+</a>
+
+</div>
+
+<p class="copyright">
+© 2026 SIMTAR MEDICAL LABORATORIES
 </p>
 
 </footer>
+<a
+href="https://wa.me/263780652253"
+class="whatsapp-float"
+target="_blank"
+>
 
+<img
+src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
+>
+
+</a>
+<!-- CHATBOT -->
+
+<div class="chatbot-container">
+
+<div class="chatbot-header">
+SIMTAR AI Assistant
+</div>
+
+<div class="chatbot-messages" id="chatMessages">
+
+<div class="bot-message">
+Hello 👋 Welcome to SIMTAR Medical Laboratories.
+How can I help you today?
+</div>
+
+</div>
+
+<div class="chatbot-input">
+
+<input
+type="text"
+id="userInput"
+placeholder="Ask a health question..."
+>
+
+<button onclick="sendMessage()">
+Send
+</button>
+
+</div>
+
+</div>
+
+<button
+class="chat-toggle"
+onclick="toggleChat()"
+>
+💬
+</button>
+<script>
+
+function toggleChat(){
+
+const chat =
+document.querySelector(
+'.chatbot-container'
+);
+
+if(
+chat.style.display === 'flex'
+){
+
+chat.style.display = 'none';
+
+}else{
+
+chat.style.display = 'flex';
+
+}
+
+}
+
+function sendMessage(){
+
+const input =
+document.getElementById(
+'userInput'
+);
+
+const messages =
+document.getElementById(
+'chatMessages'
+);
+
+const userText =
+input.value.trim();
+
+if(userText === '') return;
+
+/* USER MESSAGE */
+
+messages.innerHTML +=
+`
+<div class="user-message">
+${userText}
+</div>
+`;
+
+/* BOT RESPONSE */
+
+let response =
+"I can help with appointments, laboratory tests, and patient information.";
+
+if(
+userText.toLowerCase().includes('blood')
+){
+
+response =
+"SIMTAR offers professional blood testing services with accurate diagnostics.";
+
+}
+
+else if(
+userText.toLowerCase().includes('appointment')
+){
+
+response =
+"You can book appointments directly from the booking page.";
+
+}
+
+else if(
+userText.toLowerCase().includes('location')
+){
+
+response =
+"SIMTAR Medical Laboratories is located in Chiredzi, Zimbabwe.";
+
+}
+
+else if(
+userText.toLowerCase().includes('hiv')
+){
+
+response =
+"We provide confidential HIV testing and counseling services.";
+
+}
+
+setTimeout(() => {
+
+messages.innerHTML +=
+`
+<div class="bot-message">
+${response}
+</div>
+`;
+
+messages.scrollTop =
+messages.scrollHeight;
+
+}, 500);
+
+input.value = '';
+
+}
+
+</script>
 </body>
 </html>

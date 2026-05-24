@@ -13,7 +13,7 @@ document
         date: document.getElementById("date").value
     };
 
-    fetch("http://localhost:3000/appointment", {
+    fetch("https://simtar.onrender.com/appointment", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
